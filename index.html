@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Aventura de Cumpleaños Épica!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>¡Feliz Cumpleaños, Grecia!</h1>
+        </header>
+
+        <div id="screen-start" class="screen active">
+            <h2>Tu Aventura Comienza...</h2>
+            <p>¡Prepárate para una misión especial de cumpleaños!</p>
+            <!-- Aquí podrías poner un GIF o imagen de inicio -->
+            <!-- <img src="link_a_tu_imagen_de_inicio.gif" alt="Inicio Aventura"> -->
+            <button onclick="startGame()">¡Iniciar Misión!</button>
+        </div>
+
+        <div id="screen-roblox" class="screen">
+            <h2>Nivel 1: El Desafío Roblox</h2>
+            <p>Estás en el lobby de tu juego favorito. Un Guardián Bloque te detiene:</p>
+            <p>"Solo los verdaderos jugadores pueden pasar. ¿Cuál es el comando para bailar en muchos juegos de Roblox?"</p>
+            <!-- <img src="link_a_imagen_roblox.png" alt="Roblox"> -->
+            <div class="options">
+                <button onclick="checkAnswer('roblox', '/e dance')">/e dance</button>
+                <button onclick="checkAnswer('roblox', '/emote wave')">/emote wave</button>
+                <button onclick="checkAnswer('roblox', '/jump')">/jump</button>
+            </div>
+            <p id="feedback-roblox" class="feedback"></p>
+        </div>
+
+        <div id="screen-minecraft" class="screen">
+            <h2>Nivel 2: La Cueva de Minecraft</h2>
+            <p>Has llegado a una cueva oscura. Necesitas luz. ¿Qué crafteas primero con madera y carbón?</p>
+            <!-- <img src="link_a_imagen_minecraft.png" alt="Minecraft"> -->
+            <div class="options">
+                <button onclick="checkAnswer('minecraft', 'Pico')">Un Pico</button>
+                <button onclick="checkAnswer('minecraft', 'Antorchas')">Antorchas</button>
+                <button onclick="checkAnswer('minecraft', 'Espada')">Una Espada</button>
+            </div>
+            <p id="feedback-minecraft" class="feedback"></p>
+        </div>
+
+        <div id="screen-anime" class="screen">
+            <h2>Nivel 3: El Torneo Anime</h2>
+            <p>¡Es hora de demostrar tu poder Otaku! ¿Cuál de estos es un género popular de anime conocido por sus combates y superpoderes?</p>
+            <!-- <img src="link_a_imagen_anime.png" alt="Anime"> -->
+            <div class="options">
+                <button onclick="checkAnswer('anime', 'Shojo')">Shojo</button>
+                <button onclick="checkAnswer('anime', 'Slice of Life')">Slice of Life</button>
+                <button onclick="checkAnswer('anime', 'Shonen')">Shonen</button>
+            </div>
+            <p id="feedback-anime" class="feedback"></p>
+        </div>
+
+        <div id="screen-final" class="screen">
+            <h2>¡MISIÓN CUMPLIDA, Grecia Cybord!</h2>
+            <div class="gift-reveal">
+                <p>¡Has superado todos los desafíos como una verdadera campeona!</p>
+                <p>Tu espíritu aventurero y tu pasión por Roblox, Minecraft y el Anime son legendarios.</p>
+                <p>Como recompensa, aquí tienes tus tesoros digitales:</p>
+                <ul>
+                    <li><strong><a href="assets/construcción de personaje con la técnica pixel art.pdf"
+                                 download="nombre_sugerido_al_descargar.pdf" target="_blank" rel="noopener noreferrer">
+                        Descargar construcción de personaje con la técnica pixel art
+                        </a></strong></li>
+                    <li><strong><a href="assets/ENCICLOPEDIA Diseño y programación de videojuegos.pdf" target="_blank" rel="noopener noreferrer"
+                                 download="ENCICLOPEDIA Diseño y programación de videojuegos.pdf">
+                        Descargar ENCICLOPEDIA Diseño y programación de videojuegos.pdf
+                        </a></strong></li>
+                    <li><strong><a href="assets/el-diario-de-Ana-Frank.pdf" download="el-diario-de-Ana-Frank.pdf" target="_blank" rel="noopener noreferrer">
+                        Descargar el-diario-de-Ana-Frank.pdf</a></strong></li>
+                    <li><strong>Te quiero mucho Grecia Cybord:</strong> ¡siempre me ha llenado de orgullo decir que tengo una ahijada aplicada, inteligente y muy cariñosa. Verte crecer cumpliendo tus sueños es una gran bendición y mi mayor de deseo es que sigas creciendo profesionalmente y aprovechando todos tus talentos, te veo en lo más alto. Dios te bendiga se te quiere enorme, del mismo tamaño que el mundo de Minecraft. Felíz cumpleaños.! </li>
+                    <!-- Si tienes un arte digital, pon un link: -->
+                    <!-- <li><strong>Tu Retrato Épico:</strong> <a href="link_al_arte.jpg" target="_blank" rel="noopener noreferrer">¡Míralo aquí!</a></li> -->
+                </ul>
+                <p> ¡FELICIDADES! </p>
+            </div>
+            <!-- <img src="link_a_imagen_celebracion.gif" alt="Celebración"> -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
