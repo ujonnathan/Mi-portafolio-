@@ -1,60 +1,111 @@
-const screens = {
-    start: document.getElementById('screen-start'),
-    roblox: document.getElementById('screen-roblox'),
-    minecraft: document.getElementById('screen-minecraft'),
-    anime: document.getElementById('screen-anime'),
-    final: document.getElementById('screen-final')
-};
+ocument.addEventListener('DOMContentLoaded', () => {
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
 
-const correctAnswers = {
-    roblox: '/e dance',
-    minecraft: 'Antorchas',
-    anime: 'Shonen'
-};
+    // Voice Over Demo Player
+    const mainAudioPlayer = document.querySelector('.main-audio-player');
+    const demoItems = document.querySelectorAll('.demo-item');
 
-let currentScreen = 'start';
+    demoItems.forEach(item => {
+        item.addEventListener('click', () => {
+            // Remove active class from all items
+            demoItems.forEach(i => i.classList.remove('active'));
+            // Add active class to the clicked item
+            item.classList.add('active');
 
-function showScreen(screenName) {
-    // Ocultar todas las pantallas
-    for (const key in screens) {
-        screens[key].classList.remove('active');
+            // Change audio source and play
+            const audioSrc = item.getAttribute('data-src');
+            mainAudioPlayer.src = audioSrc;
+            mainAudioPlayer.play();
+        });
+    });
+
+    // Initialize the first demo as active
+    if (demoItems.length > 0) {
+        demoItems[0].click(); // Simulate click on the first item
     }
-    // Mostrar la pantalla deseada
-    screens[screenName].classList.add('active');
-    currentScreen = screenName;
-}
 
-function startGame() {
-    showScreen('roblox');
-}
+    // Content Creation Tabs
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
 
-function checkAnswer(level, selectedAnswer) {
-    const feedbackEl = document.getElementById(`feedback-${level}`);
-    if (selectedAnswer === correctAnswers[level]) {
-        feedbackEl.textContent = "¡Correcto! Avanzando...";
-        feedbackEl.className = 'feedback correct'; // Clase para color verde
-        // Esperar un poco antes de pasar a la siguiente pantalla
-        setTimeout(() => {
-            if (level === 'roblox') {
-                showScreen('minecraft');
-            } else if (level === 'minecraft') {
-                showScreen('anime');
-            } else if (level === 'anime') {
-                showScreen('final');
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons and contents
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Add active class to the clicked button
+            button.classList.add('active');
+
+            // Show the corresponding content
+            const targetTabId = button.getAttribute('data-tab');
+            document.getElementById(targetTabId).classList.add('active');
+        });
+    });
+
+    // Initialize the first tab as active
+    if (tabButtons.length > 0) {
+        tabButtons[0].click(); // Simulate click on the first tab
+    }
+
+    // "Read More" functionality for Text Cards
+    document.querySelectorAll('.text-card .read-more').forEach(button => {
+        button.addEventListener('click', function() {
+            const paragraph = this.previousElementSibling; // The <p> tag before the button
+            if (paragraph.classList.contains('expanded')) {
+                paragraph.classList.remove('expanded');
+                this.textContent = 'Leer mÃ¡s';
+            } else {
+                paragraph.classList.add('expanded');
+                this.textContent = 'Leer menos';
             }
-        }, 1500); // 1.5 segundos
-    } else {
-        feedbackEl.textContent = "¡Oh no! Intenta de nuevo.";
-        feedbackEl.className = 'feedback incorrect'; // Clase para color rojo
+        });
+    });
+
+    // Testimonial Carousel (simplified - manual buttons)
+    const testimonialCarousel = document.querySelector('.testimonial-carousel');
+    const testimonialItems = document.querySelectorAll('.testimonial-item');
+    const prevTestimonialBtn = document.querySelector('.prev-testimonial');
+    const nextTestimonialBtn = document.querySelector('.next-testimonial');
+    let currentIndex = 0;
+
+    function updateCarousel() {
+        // Simple slide effect by changing transform
+        testimonialCarousel.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
-}
 
-// Inicializar: Mostrar solo la pantalla de inicio
-showScreen('start');
+    prevTestimonialBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : testimonialItems.length - 1;
+        updateCarousel();
+    });
 
-// --- Personalización ---
-// Reemplaza [NOMBRE DE TU HIJA] en index.html
-// Reemplaza los códigos de regalo en index.html en #screen-final
-// Si quieres usar imágenes, descomenta las líneas <img> en index.html
-// y el bloque /* img { ... } */ en style.css, y pon tus propios links.
-// Puedes cambiar las preguntas y respuestas en index.html y en `correctAnswers` en este archivo.
+    nextTestimonialBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex < testimonialItems.length - 1) ? currentIndex + 1 : 0;
+        updateCarousel();
+    });
+
+    // Optional: Auto-slide for testimonials (uncomment to enable)
+    // setInterval(() => {
+    //     nextTestimonialBtn.click();
+    // }, 7000); // Change testimonial every 7 seconds
+
+
+    // Contact Form Submission (example - usually handled by backend)
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Â¡Gracias por tu mensaje! Me pondrÃ© en contacto contigo pronto.');
+            this.reset(); // Clear the form
+            // In a real application, you would send this data to a server
+        });
+    }
+});
